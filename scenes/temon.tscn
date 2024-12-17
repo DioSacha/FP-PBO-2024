@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6q3fgbncrb8u"]
+
+[ext_resource type="Texture2D" uid="uid://dg81fnhi7ka58" path="res://assets/Temon.png" id="1_cuhuy"]
+[ext_resource type="Script" path="res://scenes/Temon.cs" id="1_rovtm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrkxj"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xciat"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0kml"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weukj"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3uxx"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn0ol"]
+atlas = ExtResource("1_cuhuy")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tp5gk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrkxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xciat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0kml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weukj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3uxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn0ol")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6upq"]
+size = Vector2(43, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6r7s"]
+size = Vector2(47, 75)
+
+[node name="Temon" type="RigidBody2D"]
+script = ExtResource("1_rovtm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, -64)
+sprite_frames = SubResource("SpriteFrames_tp5gk")
+animation = &"Default"
+autoplay = "Default"
+frame_progress = 0.279179
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -37.5)
+shape = SubResource("RectangleShape2D_l6upq")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 25.5)
+shape = SubResource("RectangleShape2D_j6r7s")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
